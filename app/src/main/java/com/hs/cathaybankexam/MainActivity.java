@@ -6,11 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import com.hs.cathaybankexam.area.AreaListFragment;
-import com.hs.cathaybankexam.network.RetrofitServiceGenerator;
-import com.hs.cathaybankexam.network.request.AreaRequest;
+import com.hs.cathaybankexam.area.AreaList.AreaListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,7 +1,8 @@
-package com.hs.cathaybankexam.area;
+package com.hs.cathaybankexam.area.AreaList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hs.cathaybankexam.MainActivity;
 import com.hs.cathaybankexam.R;
+import com.hs.cathaybankexam.area.AreaDetail.AreaDetailFragment;
+import com.hs.cathaybankexam.area.OnItemClick;
 import com.hs.cathaybankexam.model.Area;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -22,9 +25,11 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
 
     private List<Area> mItems;
     private Context context;
+    private OnItemClick onItemClick;
 
-    public AreaAdapter(Context context) {
+    public AreaAdapter(Context context, OnItemClick onItemClick) {
         this.context = context;
+        this.onItemClick = onItemClick;
     }
 
     @NonNull
@@ -41,6 +46,8 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
         holder.title.setText(mItems.get(position).getE_Name());
         holder.description.setText(mItems.get(position).getE_Info());
         holder.release_date.setText(mItems.get(position).getE_Memo());
+
+        holder.itemView.setOnClickListener(new ClickListener(mItems.get(position)));
 
         Glide.with(this.context)
                 .load(mItems.get(position).getE_Pic_URL())
@@ -74,6 +81,21 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.description);
             release_date = itemView.findViewById(R.id.date);
+
         }
     }
+
+    class ClickListener implements View.OnClickListener {
+
+        private Area area;
+        public ClickListener(Area area) {
+            this.area = area;
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClick.onClick(area);
+        }
+    }
+
 }

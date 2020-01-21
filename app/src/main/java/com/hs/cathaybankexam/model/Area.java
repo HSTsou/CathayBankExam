@@ -1,8 +1,11 @@
 package com.hs.cathaybankexam.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Area {
+public class Area implements Parcelable {
     @SerializedName("E_Pic_URL")
     private String e_Pic_URL;
     @SerializedName("E_Geo")
@@ -22,6 +25,48 @@ public class Area {
     private int _id;
     @SerializedName("E_URL")
     private String e_URL;
+
+    protected Area(Parcel in) {
+        e_Pic_URL = in.readString();
+        e_Geo = in.readString();
+        e_Info = in.readString();
+        e_no = in.readInt();
+        e_Category = in.readString();
+        e_Name = in.readString();
+        e_Memo = in.readString();
+        _id = in.readInt();
+        e_URL = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(e_Pic_URL);
+        dest.writeString(e_Geo);
+        dest.writeString(e_Info);
+        dest.writeInt(e_no);
+        dest.writeString(e_Category);
+        dest.writeString(e_Name);
+        dest.writeString(e_Memo);
+        dest.writeInt(_id);
+        dest.writeString(e_URL);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Area> CREATOR = new Creator<Area>() {
+        @Override
+        public Area createFromParcel(Parcel in) {
+            return new Area(in);
+        }
+
+        @Override
+        public Area[] newArray(int size) {
+            return new Area[size];
+        }
+    };
 
     public String getE_Pic_URL() {
         return e_Pic_URL;
@@ -94,4 +139,6 @@ public class Area {
     public void setE_URL(String e_URL) {
         this.e_URL = e_URL;
     }
+
+
 }

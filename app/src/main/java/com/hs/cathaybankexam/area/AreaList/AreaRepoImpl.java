@@ -1,4 +1,4 @@
-package com.hs.cathaybankexam.area;
+package com.hs.cathaybankexam.area.AreaList;
 
 
 import android.util.Log;
