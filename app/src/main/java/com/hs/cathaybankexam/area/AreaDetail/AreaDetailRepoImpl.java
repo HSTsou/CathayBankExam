@@ -1,9 +1,7 @@
 package com.hs.cathaybankexam.area.AreaDetail;
 
 import com.hs.cathaybankexam.network.RetrofitServiceGenerator;
-import com.hs.cathaybankexam.network.request.AreaRequest;
 import com.hs.cathaybankexam.network.request.PlantRequest;
-import com.hs.cathaybankexam.network.responce.AreaResponse;
 import com.hs.cathaybankexam.network.responce.PlantResponse;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

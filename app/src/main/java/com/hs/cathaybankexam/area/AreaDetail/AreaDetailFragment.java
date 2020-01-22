@@ -3,7 +3,7 @@ package com.hs.cathaybankexam.area.AreaDetail;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.hs.cathaybankexam.MainActivity;
 import com.hs.cathaybankexam.R;
+import com.hs.cathaybankexam.area.AreaList.AreaListFragment;
 import com.hs.cathaybankexam.area.OnItemClick;
 import com.hs.cathaybankexam.model.Area;
 import com.hs.cathaybankexam.model.Plant;
@@ -23,12 +25,15 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AreaDetailFragment extends Fragment implements AreaDetailContract.View {
     private PlantAdapter adapter;
+    private Toolbar toolbar;
     private ProgressBar progressBar;
     private TextView areaTitle;
     private TextView areaInfo;
@@ -67,6 +72,17 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
         areaDate = view.findViewById(R.id.area_date);
         areaWebUrl = view.findViewById(R.id.area_webview);
 
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((MainActivity) getContext()).getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    ((MainActivity) getContext()).onBackPressed();
+                }
+            }
+        });
+
         areaTitle.setText(area.getE_Name());
         areaInfo.setText(area.getE_Info());
         areaDate.setText(area.getE_Memo());
@@ -87,7 +103,6 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
         adapter = new PlantAdapter(getContext(), new OnItemClick() {
             @Override
             public void onClick(Object object) {
-                Log.i("HS", "click at detail fragment" + object);
                 Plant plant = (Plant) object;
                 Intent i = new Intent(getActivity(), PlantActivity.class);
                 Bundle b = new Bundle();
@@ -131,6 +146,17 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
         }
         progressBar.setVisibility(View.INVISIBLE);
     }
+
+//    private void setupToolbar() {
+//        toolbar = view.findViewById(R.id.toolbar);
+//        toolbar.setNavigationIcon(R.drawable.ic_back);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().finish();
+//            }
+//        });
+//    }
 
     private void openWeb(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

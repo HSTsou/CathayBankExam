@@ -86,6 +86,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
     class ClickListener implements View.OnClickListener {
 
         private Area area;
+
         public ClickListener(Area area) {
             this.area = area;
         }

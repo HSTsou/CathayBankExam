@@ -2,6 +2,7 @@ package com.hs.cathaybankexam.plant;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.hs.cathaybankexam.model.Plant;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,6 +33,8 @@ public class PlantActivity extends AppCompatActivity {
     TextView plantFunction;
     @BindView(R.id.plant_update_date)
     TextView plantUpdateDate;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,5 +57,15 @@ public class PlantActivity extends AppCompatActivity {
         plantFeature.append(plant.getF_Feature());
         plantFunction.append(plant.getF_Function_Application());
         plantUpdateDate.append(plant.getF_Update());
+
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 }
