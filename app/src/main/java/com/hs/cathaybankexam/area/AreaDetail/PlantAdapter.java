@@ -44,6 +44,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
 
         Glide.with(this.context)
                 .load(items.get(position).getF_Pic01_URL())
+                .placeholder(R.drawable.hand_planting)
                 .circleCrop()
                 .into(holder.imageView);
 
@@ -86,6 +87,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
     class ClickListener implements View.OnClickListener {
 
         private Plant plant;
+
         public ClickListener(Plant plant) {
             this.plant = plant;
         }

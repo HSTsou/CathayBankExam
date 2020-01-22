@@ -1,5 +1,7 @@
 package com.hs.cathaybankexam.area.AreaList;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,9 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
     private List<Area> items;
     private Context context;
     private OnItemClick onItemClick;
+
+    private static final int ANIMATION_DURATION = 500;
+    private boolean onAttach = true;
 
     public AreaAdapter(Context context, OnItemClick onItemClick) {
         this.context = context;
@@ -50,6 +55,8 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
                 .load(items.get(position).getE_Pic_URL())
                 .centerCrop()
                 .into(holder.imageView);
+
+        setAnimation(holder.itemView, position);
     }
 
     @Override
@@ -60,9 +67,38 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
         return items.size();
     }
 
-    public void update(List<Area> mItems) {
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                onAttach = false;
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    void update(List<Area> mItems) {
         this.items = mItems;
         notifyDataSetChanged();
+    }
+
+    private void setAnimation(View itemView, int i) {
+        if (!onAttach) {
+            i = -1;
+        }
+        boolean isNotFirstItem = i == -1;
+        i++;
+        itemView.setAlpha(0.f);
+        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator animator = ObjectAnimator.ofFloat(itemView, "alpha", 0.f, 0.5f, 1.0f);
+        ObjectAnimator.ofFloat(itemView, "alpha", 0.f).start();
+        animator.setStartDelay(isNotFirstItem ? ANIMATION_DURATION / 2 : (i * ANIMATION_DURATION / 3));
+        animator.setDuration(ANIMATION_DURATION);
+        animatorSet.play(animator);
+        animator.start();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -87,7 +123,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
 
         private Area area;
 
-        public ClickListener(Area area) {
+        ClickListener(Area area) {
             this.area = area;
         }
 
