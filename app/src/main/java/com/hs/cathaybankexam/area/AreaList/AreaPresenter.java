@@ -7,17 +7,22 @@ import com.hs.cathaybankexam.network.responce.AreaResponse;
 import com.hs.cathaybankexam.presenter.BasePresenter;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 public class AreaPresenter extends BasePresenter<AreaContract.View> implements AreaContract.Presenter {
 
     private AreaRepo areaRepo;
-    private Disposable disposable;
+    private CompositeDisposable compositeDisposable;
 
     public AreaPresenter(AreaContract.View view, AreaRepo repo) {
         super(view);
         areaRepo = repo;
-        disposable = new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        compositeDisposable.clear();
     }
 
     @Override
@@ -28,7 +33,7 @@ public class AreaPresenter extends BasePresenter<AreaContract.View> implements A
 
         getView().showProgressing(true);
 
-        areaRepo.getAreaData(new AreaRepo.GetAreaDataCallback() {
+        compositeDisposable.add(areaRepo.getAreaData(new AreaRepo.GetAreaDataCallback() {
             @Override
             public void onSuccess(AreaResponse areaResponse) {
                 AreaResponse.ResultResponse resultResponse = areaResponse.getResult();
@@ -42,6 +47,6 @@ public class AreaPresenter extends BasePresenter<AreaContract.View> implements A
                 getView().showProgressing(false);
                 getView().onGetAreaDataError(throwable);
             }
-        });
+        }));
     }
 }

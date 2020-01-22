@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hs.cathaybankexam.R;
-import com.hs.cathaybankexam.model.Area;
+import com.hs.cathaybankexam.area.OnItemClick;
 import com.hs.cathaybankexam.model.Plant;
 
 import java.util.List;
@@ -19,47 +19,56 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> {
 
-    private List<Plant> mItems;
+    private List<Plant> items;
     private Context context;
+
+    private OnItemClick onItemClick;
+
+    PlantAdapter(Context context, OnItemClick onItemClick) {
+        this.context = context;
+        this.onItemClick = onItemClick;
+    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.area_item, parent, false);
+                .inflate(R.layout.item_plant_profile, parent, false);
         PlantAdapter.ViewHolder holder = new PlantAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(mItems.get(position).getF_Name_Ch());
+        holder.title.setText(items.get(position).getF_Name_Ch());
 
         Glide.with(this.context)
-                .load(mItems.get(position).getF_Pic01_URL())
-                .centerCrop()
+                .load(items.get(position).getF_Pic01_URL())
+                .circleCrop()
                 .into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new ClickListener(items.get(position)));
     }
 
     @Override
     public int getItemCount() {
-        if (mItems == null) {
+        if (items == null) {
             return 0;
         }
-        return mItems.size();
+        return items.size();
     }
 
 
-    public void update(List<Plant> mItems) {
-        this.mItems = mItems;
+    void update(List<Plant> mItems) {
+        this.items = mItems;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView title;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.pic);
@@ -71,6 +80,19 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
 
                 }
             });
+        }
+    }
+
+    class ClickListener implements View.OnClickListener {
+
+        private Plant plant;
+        public ClickListener(Plant plant) {
+            this.plant = plant;
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClick.onClick(plant);
         }
     }
 }

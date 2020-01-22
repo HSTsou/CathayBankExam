@@ -1,8 +1,11 @@
 package com.hs.cathaybankexam.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Plant {
+public class Plant implements Parcelable {
     @SerializedName("F_Name_Latin")
     private String F_Name_Latin;
     @SerializedName("F_pdf02_ALT")
@@ -79,6 +82,106 @@ public class Plant {
     private String F_Update;
     @SerializedName("_id")
     private float _id;
+
+    protected Plant(Parcel in) {
+        F_Name_Latin = in.readString();
+        F_pdf02_ALT = in.readString();
+        F_Location = in.readString();
+        F_pdf01_ALT = in.readString();
+        rank = in.readFloat();
+        F_Summary = in.readString();
+        F_Pic01_URL = in.readString();
+        _full_count = in.readString();
+        F_pdf02_URL = in.readString();
+        F_Pic02_URL = in.readString();
+        F_Keywords = in.readString();
+        F_Code = in.readString();
+        F_Geo = in.readString();
+        F_Pic03_URL = in.readString();
+        F_Voice01_ALT = in.readString();
+        F_AlsoKnown = in.readString();
+        F_Voice02_ALT = in.readString();
+        F_Name_Ch = in.readString();
+        F_Pic04_ALT = in.readString();
+        F_Name_En = in.readString();
+        F_Brief = in.readString();
+        F_Pic04_URL = in.readString();
+        F_Voice01_URL = in.readString();
+        F_Feature = in.readString();
+        F_Pic02_ALT = in.readString();
+        F_Family = in.readString();
+        F_Voice03_ALT = in.readString();
+        F_Voice02_URL = in.readString();
+        F_Pic03_ALT = in.readString();
+        F_Pic01_ALT = in.readString();
+        F_CID = in.readString();
+        F_pdf01_URL = in.readString();
+        F_Vedio_URL = in.readString();
+        F_Genus = in.readString();
+        F_Function_Application = in.readString();
+        F_Voice03_URL = in.readString();
+        F_Update = in.readString();
+        _id = in.readFloat();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(F_Name_Latin);
+        dest.writeString(F_pdf02_ALT);
+        dest.writeString(F_Location);
+        dest.writeString(F_pdf01_ALT);
+        dest.writeFloat(rank);
+        dest.writeString(F_Summary);
+        dest.writeString(F_Pic01_URL);
+        dest.writeString(_full_count);
+        dest.writeString(F_pdf02_URL);
+        dest.writeString(F_Pic02_URL);
+        dest.writeString(F_Keywords);
+        dest.writeString(F_Code);
+        dest.writeString(F_Geo);
+        dest.writeString(F_Pic03_URL);
+        dest.writeString(F_Voice01_ALT);
+        dest.writeString(F_AlsoKnown);
+        dest.writeString(F_Voice02_ALT);
+        dest.writeString(F_Name_Ch);
+        dest.writeString(F_Pic04_ALT);
+        dest.writeString(F_Name_En);
+        dest.writeString(F_Brief);
+        dest.writeString(F_Pic04_URL);
+        dest.writeString(F_Voice01_URL);
+        dest.writeString(F_Feature);
+        dest.writeString(F_Pic02_ALT);
+        dest.writeString(F_Family);
+        dest.writeString(F_Voice03_ALT);
+        dest.writeString(F_Voice02_URL);
+        dest.writeString(F_Pic03_ALT);
+        dest.writeString(F_Pic01_ALT);
+        dest.writeString(F_CID);
+        dest.writeString(F_pdf01_URL);
+        dest.writeString(F_Vedio_URL);
+        dest.writeString(F_Genus);
+        dest.writeString(F_Function_Application);
+        dest.writeString(F_Voice03_URL);
+        dest.writeString(F_Update);
+        dest.writeFloat(_id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Plant> CREATOR = new Creator<Plant>() {
+        @Override
+        public Plant createFromParcel(Parcel in) {
+            return new Plant(in);
+        }
+
+        @Override
+        public Plant[] newArray(int size) {
+            return new Plant[size];
+        }
+    };
 
     public String getF_Name_Latin() {
         return F_Name_Latin;

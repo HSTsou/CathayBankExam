@@ -3,6 +3,7 @@ package com.hs.cathaybankexam.area.AreaDetail;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,17 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hs.cathaybankexam.R;
+import com.hs.cathaybankexam.area.OnItemClick;
 import com.hs.cathaybankexam.model.Area;
 import com.hs.cathaybankexam.model.Plant;
+import com.hs.cathaybankexam.plant.PlantActivity;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AreaDetailFragment extends Fragment implements AreaDetailContract.View {
@@ -44,7 +47,7 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new AreaDetailPresenter();
+        presenter = new AreaDetailPresenter(this, new AreaDetailRepoImpl());
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -78,9 +81,20 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
                 .into(areaImage);
 
         RecyclerView recyclerView = view.findViewById(R.id.area_detail_plants_recyclerview);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new PlantAdapter();
+        adapter = new PlantAdapter(getContext(), new OnItemClick() {
+            @Override
+            public void onClick(Object object) {
+                Log.i("HS", "click at detail fragment" + object);
+                Plant plant = (Plant) object;
+                Intent i = new Intent(getActivity(), PlantActivity.class);
+                Bundle b = new Bundle();
+                b.putParcelable("plant", plant);
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -89,13 +103,14 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        presenter.getAreaData();
+        Log.i("HS", "N?" + area.getE_Name());
+        presenter.getAreaDetailPlantData(area.getE_Name());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        presenter.destroy();
+        presenter.destroy();
     }
 
     @Override
@@ -110,7 +125,11 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
 
     @Override
     public void showProgressing(boolean show) {
-
+        if (show) {
+            progressBar.setVisibility(View.VISIBLE);
+            return;
+        }
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void openWeb(String url) {

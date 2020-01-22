@@ -1,6 +1,6 @@
 package com.hs.cathaybankexam.network.request;
 
-import com.hs.cathaybankexam.network.responce.AreaResponse;
+import com.hs.cathaybankexam.network.responce.PlantResponse;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -10,7 +10,7 @@ public interface PlantRequest {
     String PRE_STR = "apiAccess";
 
     @GET(PRE_STR)
-    Single<AreaResponse> getPlantData(
+    Single<PlantResponse> getPlantData(
             @Query("scope")
                     String scope,
             @Query("rid")

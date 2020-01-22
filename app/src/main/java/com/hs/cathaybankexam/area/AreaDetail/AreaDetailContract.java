@@ -17,7 +17,7 @@ interface AreaDetailContract {
 
     interface Presenter {
 
-        void getAreaDetailPlantData();
+        void getAreaDetailPlantData(String areaName);
 
     }
 }

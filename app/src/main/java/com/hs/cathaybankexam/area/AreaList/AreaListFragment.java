@@ -18,10 +18,14 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class AreaListFragment extends Fragment implements AreaContract.View {
+
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private AreaAdapter adapter;
     private ProgressBar progressBar;
@@ -49,6 +53,23 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new AreaAdapter(getContext(), new AreaClick());
         recyclerView.setAdapter(adapter);
+
+        swipeRefreshLayout = view.findViewById(R.id.layout_swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        presenter.getAreaData();
+                        if (swipeRefreshLayout != null) {
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+                    }
+                });
+            }
+        });
+
 
         return view;
     }
@@ -88,16 +109,16 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
 
         @Override
         public void onClick(Object object) {
-            Log.i("HS", "AreaFragment onClick " + object);
             AreaDetailFragment detailFragment = new AreaDetailFragment();
             Area area = (Area) object;
             Bundle bundle = new Bundle();
             bundle.putParcelable("area", area);
             detailFragment.setArguments(bundle);
-
+            FragmentManager fm = getFragmentManager();
             ((MainActivity) getContext()).getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_holder, detailFragment, "area_detail_fragment")
+                    .hide(fm.findFragmentByTag("area_list_fragment"))
+                    .add(R.id.fragment_holder, detailFragment, "area_detail_fragment")
                     .addToBackStack(null)
                     .commit();
         }
