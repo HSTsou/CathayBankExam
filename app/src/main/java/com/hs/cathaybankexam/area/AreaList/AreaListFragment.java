@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.hs.cathaybankexam.MainActivity;
 import com.hs.cathaybankexam.R;
@@ -93,7 +94,7 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
 
     @Override
     public void onGetAreaDataError(Throwable throwable) {
-        //TODO
+        Toast.makeText(getContext(), R.string.get_date_error, Toast.LENGTH_LONG).show();
     }
 
     @Override

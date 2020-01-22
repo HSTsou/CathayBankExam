@@ -1,12 +1,9 @@
 package com.hs.cathaybankexam.area.AreaDetail;
 
-import android.util.Log;
-
 import com.hs.cathaybankexam.network.responce.PlantResponse;
 import com.hs.cathaybankexam.presenter.BasePresenter;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 public class AreaDetailPresenter extends BasePresenter<AreaDetailContract.View> implements AreaDetailContract.Presenter {
 

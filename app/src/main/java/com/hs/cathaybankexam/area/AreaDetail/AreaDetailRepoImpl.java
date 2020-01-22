@@ -30,6 +30,11 @@ public class AreaDetailRepoImpl implements AreaDetailRepo {
                     public void accept(PlantResponse plantResponse) throws Exception {
                         callback.onSuccess(plantResponse);
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) {
+                        callback.onFailure(throwable);
+                    }
                 });
     }
 }

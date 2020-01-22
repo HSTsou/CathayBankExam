@@ -7,4 +7,5 @@
     <string name="plant_feature">辨認方式\n</string>
     <string name="plant_function">功能性\n</string>
     <string name="plant_update_date">最後更新：</string>
+    <string name="get_date_error">發生一點錯誤呢</string>
 </resources>

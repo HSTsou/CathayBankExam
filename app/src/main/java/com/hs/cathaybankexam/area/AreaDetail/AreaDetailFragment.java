@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hs.cathaybankexam.R;
@@ -103,7 +104,6 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.i("HS", "N?" + area.getE_Name());
         presenter.getAreaDetailPlantData(area.getE_Name());
     }
 
@@ -120,7 +120,7 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
 
     @Override
     public void onGetPlantDataError(Throwable throwable) {
-
+        Toast.makeText(getContext(), R.string.get_date_error, Toast.LENGTH_LONG).show();
     }
 
     @Override
