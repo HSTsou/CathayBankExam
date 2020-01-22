@@ -110,11 +110,17 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
 
         @Override
         public void onClick(Object object) {
+            if(!(object instanceof Area)){
+                return;
+            }
+
             AreaDetailFragment detailFragment = new AreaDetailFragment();
+
             Area area = (Area) object;
             Bundle bundle = new Bundle();
             bundle.putParcelable("area", area);
             detailFragment.setArguments(bundle);
+
             FragmentManager fm = getFragmentManager();
             ((MainActivity) getContext()).getSupportFragmentManager()
                     .beginTransaction()

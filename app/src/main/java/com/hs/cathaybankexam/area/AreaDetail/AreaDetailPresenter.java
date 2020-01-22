@@ -41,6 +41,7 @@ public class AreaDetailPresenter extends BasePresenter<AreaDetailContract.View> 
             @Override
             public void onFailure(Throwable throwable) {
                 getView().showProgressing(false);
+                getView().onGetPlantDataError(throwable);
             }
         }));
     }
