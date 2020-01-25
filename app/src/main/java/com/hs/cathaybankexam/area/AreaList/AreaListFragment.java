@@ -1,7 +1,6 @@
 package com.hs.cathaybankexam.area.AreaList;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class AreaListFragment extends Fragment implements AreaContract.View {
 
-    SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private AreaAdapter adapter;
     private ProgressBar progressBar;
@@ -110,21 +109,23 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
 
         @Override
         public void onClick(Object object) {
-            if(!(object instanceof Area)){
+            if (!(object instanceof Area)) {
                 return;
             }
 
+            FragmentManager fm = getFragmentManager();
+
             AreaDetailFragment detailFragment = new AreaDetailFragment();
+            Fragment areaListFragment = fm.findFragmentByTag("area_list_fragment");
 
             Area area = (Area) object;
             Bundle bundle = new Bundle();
             bundle.putParcelable("area", area);
             detailFragment.setArguments(bundle);
 
-            FragmentManager fm = getFragmentManager();
             ((MainActivity) getContext()).getSupportFragmentManager()
                     .beginTransaction()
-                    .hide(fm.findFragmentByTag("area_list_fragment"))
+                    .hide(areaListFragment)
                     .add(R.id.fragment_holder, detailFragment, "area_detail_fragment")
                     .addToBackStack(null)
                     .commit();

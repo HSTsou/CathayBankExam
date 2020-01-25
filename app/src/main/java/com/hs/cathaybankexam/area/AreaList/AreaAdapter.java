@@ -39,8 +39,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
     public AreaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_area, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -108,7 +107,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
         private TextView description;
         private TextView release_date;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.pic);

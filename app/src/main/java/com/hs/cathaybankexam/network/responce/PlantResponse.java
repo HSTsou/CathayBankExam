@@ -1,7 +1,6 @@
 package com.hs.cathaybankexam.network.responce;
 
 import com.google.gson.annotations.SerializedName;
-import com.hs.cathaybankexam.model.Area;
 import com.hs.cathaybankexam.model.Plant;
 
 import java.util.List;

@@ -26,7 +26,7 @@ public class Area implements Parcelable {
     @SerializedName("E_URL")
     private String e_URL;
 
-    protected Area(Parcel in) {
+    private Area(Parcel in) {
         e_Pic_URL = in.readString();
         e_Geo = in.readString();
         e_Info = in.readString();

@@ -19,15 +19,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentByTag("area_list_fragment");
         if (fragment == null) {
-            fragment = AreaListFragment.newInstance();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.fragment_holder, fragment, "area_list_fragment");
-            ft.commit();
-        }
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            fragment = new AreaListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_holder, fragment, "area_list_fragment").commit();
+        }
     }
 }

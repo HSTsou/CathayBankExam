@@ -25,7 +25,7 @@ public class AreaDetailRepoImpl implements AreaDetailRepo {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<PlantResponse>() {
                     @Override
-                    public void accept(PlantResponse plantResponse) throws Exception {
+                    public void accept(PlantResponse plantResponse) {
                         callback.onSuccess(plantResponse);
                     }
                 }, new Consumer<Throwable>() {

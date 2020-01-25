@@ -43,7 +43,11 @@ public class PlantActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Plant plant = getIntent().getExtras().getParcelable("plant");
-        Log.i("HS", "plant" + plant.getF_Name_Ch());
+
+        if (plant == null) {
+            return;
+        }
+
 
         Glide.with(this.getBaseContext())
                 .load(plant.getF_Pic01_URL())

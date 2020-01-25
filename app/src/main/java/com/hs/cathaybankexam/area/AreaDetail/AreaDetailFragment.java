@@ -30,14 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AreaDetailFragment extends Fragment implements AreaDetailContract.View {
     private PlantAdapter adapter;
-    private Toolbar toolbar;
     private ProgressBar progressBar;
-    private TextView areaTitle;
-    private TextView areaInfo;
-    private TextView areaDate;
-    private TextView areaWebUrl;
 
-    private ImageView areaImage;
     private AreaDetailPresenter presenter;
     private Area area;
 
@@ -63,13 +57,13 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_area_detail, container, false);
         progressBar = view.findViewById(R.id.progress);
-        areaTitle = view.findViewById(R.id.area_title);
-        areaImage = view.findViewById(R.id.area_pic);
-        areaInfo = view.findViewById(R.id.area_info);
-        areaDate = view.findViewById(R.id.area_date);
-        areaWebUrl = view.findViewById(R.id.area_webview);
+        TextView areaTitle = view.findViewById(R.id.area_title);
+        ImageView areaImage = view.findViewById(R.id.area_pic);
+        TextView areaInfo = view.findViewById(R.id.area_info);
+        TextView areaDate = view.findViewById(R.id.area_date);
+        TextView areaWebUrl = view.findViewById(R.id.area_webview);
 
-        toolbar = view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
