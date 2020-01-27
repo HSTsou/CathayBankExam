@@ -68,7 +68,7 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getChildFragmentManager().getBackStackEntryCount() > 0) {
+                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
                     ((MainActivity) getContext()).onBackPressed();
                 }
             }
