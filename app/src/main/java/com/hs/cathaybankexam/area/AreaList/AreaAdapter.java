@@ -55,7 +55,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
                 .centerCrop()
                 .into(holder.imageView);
 
-        setAnimation(holder.itemView, position);
+        setItemAnimation(holder.itemView, position);
     }
 
     @Override
@@ -79,23 +79,25 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder> {
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    void update(List<Area> mItems) {
-        this.items = mItems;
+    void update(List<Area> items) {
+        this.items = items;
         notifyDataSetChanged();
     }
 
-    private void setAnimation(View itemView, int i) {
+    private void setItemAnimation(View itemView, int position) {
         if (!onAttach) {
-            i = -1;
+            position = -1;
         }
-        boolean isNotFirstItem = i == -1;
-        i++;
+        boolean isNotFirstItem = position == -1;
+        position++;
         itemView.setAlpha(0.f);
-        AnimatorSet animatorSet = new AnimatorSet();
+
         ObjectAnimator animator = ObjectAnimator.ofFloat(itemView, "alpha", 0.f, 0.5f, 1.0f);
         ObjectAnimator.ofFloat(itemView, "alpha", 0.f).start();
-        animator.setStartDelay(isNotFirstItem ? ANIMATION_DURATION / 2 : (i * ANIMATION_DURATION / 3));
+        animator.setStartDelay(isNotFirstItem ? ANIMATION_DURATION / 2 : (position * ANIMATION_DURATION / 3));
         animator.setDuration(ANIMATION_DURATION);
+
+        AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(animator);
         animator.start();
     }

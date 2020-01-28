@@ -1,7 +1,6 @@
 package com.hs.cathaybankexam.plant;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +34,10 @@ public class PlantActivity extends AppCompatActivity {
     TextView plantUpdateDate;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+
+    private Plant plant;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,26 +45,15 @@ public class PlantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plant_detail);
         ButterKnife.bind(this);
 
-        Plant plant = getIntent().getExtras().getParcelable("plant");
+        plant = getIntent().getExtras().getParcelable("plant");
+        initToolbar();
 
-        if (plant == null) {
-            return;
+        if (plant != null) {
+            initView();
         }
+    }
 
-
-        Glide.with(this.getBaseContext())
-                .load(plant.getF_Pic01_URL())
-                .centerInside()
-                .into(imageView);
-
-        plantTitle.append(plant.getF_Name_Ch());
-        plantEngTitle.append(plant.getF_Name_En());
-        plantOtherName.append(plant.getF_AlsoKnown());
-        plantBrief.append(plant.getF_Brief());
-        plantFeature.append(plant.getF_Feature());
-        plantFunction.append(plant.getF_Function_Application());
-        plantUpdateDate.append(plant.getF_Update());
-
+    void initToolbar() {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -70,6 +62,21 @@ public class PlantActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    void initView() {
+        Glide.with(this.getBaseContext())
+                .load(plant.getF_Pic01_URL())
+                .centerInside()
+                .into(imageView);
+
+        toolbarTitle.setText(plant.getF_Name_Ch());
+        plantTitle.append(plant.getF_Name_Ch());
+        plantEngTitle.append(plant.getF_Name_En());
+        plantOtherName.append(plant.getF_AlsoKnown());
+        plantBrief.append(plant.getF_Brief());
+        plantFeature.append(plant.getF_Feature());
+        plantFunction.append(plant.getF_Function_Application());
+        plantUpdateDate.append(plant.getF_Update());
     }
 }

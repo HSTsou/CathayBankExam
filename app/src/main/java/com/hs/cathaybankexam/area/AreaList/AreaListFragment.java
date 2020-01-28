@@ -31,12 +31,6 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
     private ProgressBar progressBar;
     private AreaPresenter presenter;
 
-    public static AreaListFragment newInstance() {
-        AreaListFragment fragment = new AreaListFragment();
-        fragment.setArguments(new Bundle());
-        return fragment;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

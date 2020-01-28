@@ -62,6 +62,21 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
         TextView areaInfo = view.findViewById(R.id.area_info);
         TextView areaDate = view.findViewById(R.id.area_date);
         TextView areaWebUrl = view.findViewById(R.id.area_webview);
+        TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
+
+        areaTitle.setText(area.getE_Name());
+        areaInfo.setText(area.getE_Info());
+        areaDate.setText(area.getE_Memo());
+        areaWebUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openWeb(area.getE_URL());
+            }
+        });
+        Glide.with(getContext())
+                .load(area.getE_Pic_URL())
+                .into(areaImage);
+        toolbarTitle.setText(area.getE_Name());
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back_white);
@@ -73,20 +88,6 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
                 }
             }
         });
-
-        areaTitle.setText(area.getE_Name());
-        areaInfo.setText(area.getE_Info());
-        areaDate.setText(area.getE_Memo());
-        areaWebUrl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openWeb(area.getE_URL());
-            }
-        });
-
-        Glide.with(getContext())
-                .load(area.getE_Pic_URL())
-                .into(areaImage);
 
         RecyclerView recyclerView = view.findViewById(R.id.area_detail_plants_recyclerview);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);

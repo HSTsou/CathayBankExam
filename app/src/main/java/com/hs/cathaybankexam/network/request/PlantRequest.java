@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface PlantRequest {
-    String PRE_STR = "apiAccess";
+    String PRE_STR = "opendata/datalist/apiAccess";
 
     @GET(PRE_STR)
     Single<PlantResponse> getPlantData(
