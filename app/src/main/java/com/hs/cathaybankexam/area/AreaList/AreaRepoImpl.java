@@ -21,8 +21,6 @@ public class AreaRepoImpl implements AreaRepo {
 
     @Override
     public Disposable getAreaData(final GetAreaDataCallback callback) {
-        Log.i("HS", "AreaRepoImpl getAreaData");
-
         return areaRequest.getAreaData("resourceAquire", "5a0e5fbb-72f8-41c6-908e-2fb25eff9b8a", 0, 0)
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.newThread())

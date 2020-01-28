@@ -33,8 +33,13 @@ public class AreaDetailPresenter extends BasePresenter<AreaDetailContract.View> 
         compositeDisposable.add(areaDetailRepo.getPlantData(areaName, new AreaDetailRepo.GetPlantDataCallback() {
             @Override
             public void onSuccess(PlantResponse plantResponse) {
-                PlantResponse.ResultResponse result = plantResponse.getResult();
                 getView().showProgressing(false);
+                PlantResponse.ResultResponse result = plantResponse.getResult();
+
+                if(result.getResults().size() == 0) {
+                    getView().onGetPlantDataFail();
+                    return;
+                }
                 getView().onGetPlantDataSuccess(result.getResults());
             }
 

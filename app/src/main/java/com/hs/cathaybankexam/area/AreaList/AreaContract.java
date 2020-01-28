@@ -10,6 +10,8 @@ interface AreaContract {
 
         void onGetAreaDataSuccess(List<Area> areas);
 
+        void onGetAreaDataFail();
+
         void onGetAreaDataError(Throwable throwable);
 
         void showProgressing(boolean show);

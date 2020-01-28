@@ -95,7 +95,7 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
         adapter = new PlantAdapter(getContext(), new OnItemClick() {
             @Override
             public void onClick(Object object) {
-                if(!(object instanceof Plant)){
+                if (!(object instanceof Plant)) {
                     return;
                 }
                 Plant plant = (Plant) object;
@@ -126,6 +126,11 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
     @Override
     public void onGetPlantDataSuccess(List<Plant> plants) {
         adapter.update(plants);
+    }
+
+    @Override
+    public void onGetPlantDataFail() {
+        Toast.makeText(getContext(), R.string.get_date_fail, Toast.LENGTH_LONG).show();
     }
 
     @Override

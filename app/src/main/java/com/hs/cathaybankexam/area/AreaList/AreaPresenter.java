@@ -36,8 +36,13 @@ public class AreaPresenter extends BasePresenter<AreaContract.View> implements A
         compositeDisposable.add(areaRepo.getAreaData(new AreaRepo.GetAreaDataCallback() {
             @Override
             public void onSuccess(AreaResponse areaResponse) {
-                AreaResponse.ResultResponse resultResponse = areaResponse.getResult();
                 getView().showProgressing(false);
+                AreaResponse.ResultResponse resultResponse = areaResponse.getResult();
+
+                if(resultResponse.getResults().size() == 0) {
+                    getView().onGetAreaDataFail();
+                    return;
+                }
                 getView().onGetAreaDataSuccess(resultResponse.getResults());
             }
 

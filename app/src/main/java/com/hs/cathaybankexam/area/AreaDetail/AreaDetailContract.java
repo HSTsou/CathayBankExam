@@ -9,6 +9,8 @@ interface AreaDetailContract {
 
         void onGetPlantDataSuccess(List<Plant> plants);
 
+        void onGetPlantDataFail();
+
         void onGetPlantDataError(Throwable throwable);
 
         void showProgressing(boolean show);
