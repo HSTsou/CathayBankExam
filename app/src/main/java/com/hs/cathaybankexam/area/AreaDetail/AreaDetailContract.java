@@ -4,7 +4,7 @@ import com.hs.cathaybankexam.model.Plant;
 
 import java.util.List;
 
-interface AreaDetailContract {
+public interface AreaDetailContract {
     interface View {
 
         void onGetPlantDataSuccess(List<Plant> plants);

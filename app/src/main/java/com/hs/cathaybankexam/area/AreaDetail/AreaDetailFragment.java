@@ -1,5 +1,6 @@
 package com.hs.cathaybankexam.area.AreaDetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,15 +14,20 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hs.cathaybankexam.MainActivity;
+import com.hs.cathaybankexam.MyApplication;
 import com.hs.cathaybankexam.R;
+import com.hs.cathaybankexam.area.AreaDetail.di.AreaDetailModule;
+
+import com.hs.cathaybankexam.area.AreaDetail.di.DaggerAreaDetailComponent;
 import com.hs.cathaybankexam.area.OnItemClick;
 import com.hs.cathaybankexam.model.Area;
 import com.hs.cathaybankexam.model.Plant;
-import com.hs.cathaybankexam.network.RetrofitServiceGenerator;
-import com.hs.cathaybankexam.network.request.PlantRequest;
+
 import com.hs.cathaybankexam.plant.PlantActivity;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +40,9 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
     private PlantAdapter adapter;
     private ProgressBar progressBar;
 
-    private AreaDetailPresenter presenter;
+    @Inject
+    AreaDetailPresenter presenter;
+
     private Area area;
 
     public static AreaDetailFragment newInstance() {
@@ -44,10 +52,19 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        DaggerAreaDetailComponent.builder()
+                .appComponent(MyApplication.getAppComponent())
+                .areaDetailModule(new AreaDetailModule(this))
+                .build()
+                .inject(this);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new AreaDetailPresenter(this,
-                new AreaDetailRepoImpl(RetrofitServiceGenerator.getInstance().create(PlantRequest.class)));
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {

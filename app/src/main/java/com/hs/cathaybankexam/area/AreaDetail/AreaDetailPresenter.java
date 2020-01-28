@@ -3,6 +3,8 @@ package com.hs.cathaybankexam.area.AreaDetail;
 import com.hs.cathaybankexam.network.responce.PlantResponse;
 import com.hs.cathaybankexam.presenter.BasePresenter;
 
+import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 public class AreaDetailPresenter extends BasePresenter<AreaDetailContract.View> implements AreaDetailContract.Presenter {
@@ -10,6 +12,7 @@ public class AreaDetailPresenter extends BasePresenter<AreaDetailContract.View> 
     private AreaDetailRepo areaDetailRepo;
     private CompositeDisposable compositeDisposable;
 
+    @Inject
     public AreaDetailPresenter(AreaDetailContract.View view, AreaDetailRepo repo) {
         super(view);
         areaDetailRepo = repo;

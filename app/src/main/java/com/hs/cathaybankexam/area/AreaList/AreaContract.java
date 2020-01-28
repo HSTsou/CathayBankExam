@@ -5,7 +5,7 @@ import com.hs.cathaybankexam.model.Area;
 import java.util.List;
 
 
-interface AreaContract {
+public interface AreaContract {
     interface View {
 
         void onGetAreaDataSuccess(List<Area> areas);

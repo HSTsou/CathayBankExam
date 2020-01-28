@@ -1,12 +1,7 @@
 package com.hs.cathaybankexam.area.AreaList;
 
-
-import android.util.Log;
-
-import com.hs.cathaybankexam.network.RetrofitServiceGenerator;
 import com.hs.cathaybankexam.network.request.AreaRequest;
 import com.hs.cathaybankexam.network.responce.AreaResponse;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -15,7 +10,7 @@ import io.reactivex.schedulers.Schedulers;
 public class AreaRepoImpl implements AreaRepo {
     private AreaRequest areaRequest;
 
-    AreaRepoImpl(AreaRequest areaRequest) {
+    public AreaRepoImpl(AreaRequest areaRequest) {
         this.areaRequest = areaRequest;
     }
 

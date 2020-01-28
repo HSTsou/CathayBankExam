@@ -6,6 +6,8 @@ import android.util.Log;
 import com.hs.cathaybankexam.network.responce.AreaResponse;
 import com.hs.cathaybankexam.presenter.BasePresenter;
 
+import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 public class AreaPresenter extends BasePresenter<AreaContract.View> implements AreaContract.Presenter {
@@ -13,6 +15,7 @@ public class AreaPresenter extends BasePresenter<AreaContract.View> implements A
     private AreaRepo areaRepo;
     private CompositeDisposable compositeDisposable;
 
+    @Inject
     public AreaPresenter(AreaContract.View view, AreaRepo repo) {
         super(view);
         areaRepo = repo;

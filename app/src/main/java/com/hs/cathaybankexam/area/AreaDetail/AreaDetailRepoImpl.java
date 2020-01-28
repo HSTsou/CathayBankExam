@@ -1,6 +1,5 @@
 package com.hs.cathaybankexam.area.AreaDetail;
 
-import com.hs.cathaybankexam.network.RetrofitServiceGenerator;
 import com.hs.cathaybankexam.network.request.PlantRequest;
 import com.hs.cathaybankexam.network.responce.PlantResponse;
 

@@ -1,5 +1,6 @@
 package com.hs.cathaybankexam.area.AreaList;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +9,16 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.hs.cathaybankexam.MainActivity;
+import com.hs.cathaybankexam.MyApplication;
 import com.hs.cathaybankexam.R;
 import com.hs.cathaybankexam.area.AreaDetail.AreaDetailFragment;
+import com.hs.cathaybankexam.area.AreaList.di.AreaModule;
+import com.hs.cathaybankexam.area.AreaList.di.DaggerAreaComponent;
 import com.hs.cathaybankexam.area.OnItemClick;
 import com.hs.cathaybankexam.model.Area;
-import com.hs.cathaybankexam.network.RetrofitServiceGenerator;
-import com.hs.cathaybankexam.network.request.AreaRequest;
-
 import java.util.List;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,13 +34,24 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
 
     private AreaAdapter adapter;
     private ProgressBar progressBar;
-    private AreaPresenter presenter;
+
+    @Inject
+    AreaPresenter presenter;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        DaggerAreaComponent.builder()
+                .appComponent(MyApplication.getAppComponent())
+                .areaModule(new AreaModule(this))
+                .build()
+                .inject(this);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new AreaPresenter(this,
-                new AreaRepoImpl(RetrofitServiceGenerator.getInstance().create(AreaRequest.class)));
     }
 
     @Nullable
@@ -75,6 +89,12 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         presenter.getAreaData();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.destroy();
     }
 
     @Override
