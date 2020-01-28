@@ -27,7 +27,7 @@
                     android:id="@+id/area_pic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/common_side_margin"
                     android:scaleType="fitCenter" />
 
                 <TextView
@@ -36,9 +36,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/area_pic"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:textSize="20sp"
+                    android:layout_marginBottom="@dimen/common_side_margin"
+                    android:layout_marginStart="@dimen/common_margin"
+                    android:textSize="@dimen/large_x_text_size"
                     android:textStyle="bold" />
 
                 <TextView
@@ -47,8 +47,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/area_title"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginStart="16dp" />
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:layout_marginStart="@dimen/common_margin" />
 
                 <TextView
                     android:id="@+id/area_date"
@@ -56,8 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/area_pic"
                     android:layout_below="@id/area_info"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:layout_marginStart="@dimen/common_margin"
                     android:layout_toStartOf="@id/area_webview"
                     android:textStyle="italic" />
 
@@ -67,8 +67,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@id/area_pic"
                     android:layout_below="@id/area_info"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:layout_marginEnd="@dimen/common_margin"
                     android:text="@string/open_web"
                     android:textColor="@android:color/holo_blue_dark" />
             </RelativeLayout>

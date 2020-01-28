@@ -4,14 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/tool_bar" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <RelativeLayout
@@ -32,10 +30,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/plant_pic"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="4dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
+                android:layout_marginBottom="@dimen/common_side_margin"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginTop="@dimen/common_side_margin"
+                android:textSize="@dimen/large_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -44,10 +42,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/plant_title"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:textSize="18sp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginStart="@dimen/common_margin"
+                android:textSize="@dimen/large_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,31 +53,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/plant_eng_title"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginStart="@dimen/common_margin"
                 android:text="@string/plant_other_name"
-                android:textSize="16sp" />
+                android:textSize="@dimen/common_text_size" />
 
             <TextView
                 android:id="@+id/plant_brief"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/plant_also_known_name"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginStart="@dimen/common_margin"
                 android:text="@string/plant_brief"
-                android:textSize="16sp" />
+                android:textSize="@dimen/common_text_size" />
 
             <TextView
                 android:id="@+id/plant_feature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/plant_brief"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginStart="@dimen/common_margin"
                 android:text="@string/plant_feature" />
 
             <TextView
@@ -87,11 +85,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/plant_feature"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginStart="@dimen/common_margin"
                 android:text="@string/plant_function"
-                android:textSize="16sp" />
+                android:textSize="@dimen/common_text_size" />
 
 
             <TextView
@@ -100,12 +98,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/plant_function"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginStart="@dimen/common_margin"
                 android:text="@string/plant_update_date"
-                android:textSize="16sp" />
+                android:textSize="@dimen/common_text_size" />
         </RelativeLayout>
     </ScrollView>
+
+    <include layout="@layout/tool_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
