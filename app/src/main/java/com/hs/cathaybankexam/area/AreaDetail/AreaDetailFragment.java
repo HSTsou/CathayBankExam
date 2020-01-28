@@ -130,12 +130,13 @@ public class AreaDetailFragment extends Fragment implements AreaDetailContract.V
 
     @Override
     public void onGetPlantDataFail() {
-        Toast.makeText(getContext(), R.string.get_date_fail, Toast.LENGTH_LONG).show();
+        String msg = String.format(getString(R.string.get_data_fail), getString(R.string.plant_title));
+        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onGetPlantDataError(Throwable throwable) {
-        Toast.makeText(getContext(), R.string.get_date_error, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), R.string.get_data_error, Toast.LENGTH_LONG).show();
     }
 
     @Override

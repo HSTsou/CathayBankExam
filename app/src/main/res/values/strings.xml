@@ -2,11 +2,12 @@
     <string name="app_name">CathayBankExam</string>
     <string name="open_web">點擊開啟網站</string>
     <string name="plant_title">植物</string>
+    <string name="area_title">館區</string>
     <string name="plant_other_name">別名\n</string>
     <string name="plant_brief">簡介\n</string>
     <string name="plant_feature">辨認方式\n</string>
     <string name="plant_function">功能性\n</string>
     <string name="plant_update_date">最後更新：</string>
-    <string name="get_date_fail">資料有一點錯誤喔！</string>
-    <string name="get_date_error">發生錯誤！</string>
+    <string name="get_data_fail">查無%s資料</string>
+    <string name="get_data_error">發生錯誤！</string>
 </resources>
