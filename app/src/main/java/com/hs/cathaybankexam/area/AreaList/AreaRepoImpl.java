@@ -15,9 +15,10 @@ import io.reactivex.schedulers.Schedulers;
 public class AreaRepoImpl implements AreaRepo {
     private AreaRequest areaRequest;
 
-    AreaRepoImpl() {
-        areaRequest = RetrofitServiceGenerator.getInstance().create(AreaRequest.class);
+    AreaRepoImpl(AreaRequest areaRequest) {
+        this.areaRequest = areaRequest;
     }
+
 
     @Override
     public Disposable getAreaData(final GetAreaDataCallback callback) {

@@ -12,6 +12,8 @@ import com.hs.cathaybankexam.R;
 import com.hs.cathaybankexam.area.AreaDetail.AreaDetailFragment;
 import com.hs.cathaybankexam.area.OnItemClick;
 import com.hs.cathaybankexam.model.Area;
+import com.hs.cathaybankexam.network.RetrofitServiceGenerator;
+import com.hs.cathaybankexam.network.request.AreaRequest;
 
 import java.util.List;
 
@@ -34,7 +36,8 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new AreaPresenter(this, new AreaRepoImpl());
+        presenter = new AreaPresenter(this,
+                new AreaRepoImpl(RetrofitServiceGenerator.getInstance().create(AreaRequest.class)));
     }
 
     @Nullable

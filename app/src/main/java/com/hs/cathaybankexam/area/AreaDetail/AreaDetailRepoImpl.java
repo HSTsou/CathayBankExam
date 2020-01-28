@@ -13,8 +13,8 @@ public class AreaDetailRepoImpl implements AreaDetailRepo {
 
     private PlantRequest plantRequest;
 
-    public AreaDetailRepoImpl() {
-        plantRequest = RetrofitServiceGenerator.getInstance().create(PlantRequest.class);
+    public AreaDetailRepoImpl(PlantRequest plantRequest) {
+        this.plantRequest = plantRequest;
     }
 
     @Override
