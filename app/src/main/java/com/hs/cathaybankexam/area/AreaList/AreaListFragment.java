@@ -92,12 +92,6 @@ public class AreaListFragment extends Fragment implements AreaContract.View {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        presenter.destroy();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         presenter.destroy();
